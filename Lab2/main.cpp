@@ -17,6 +17,7 @@ int main() {
     Student s3 = s2;          
     Student s4 = std::move(s3); 
     Student s5 = s1 + s2;
+    std::cout << Student::getCount() << std::endl;
 
     s1.display();
     s2.display();
