@@ -2,6 +2,7 @@
 #include "Course.h"
 #include "Schedule.h"
 
+
 int main() {
 
     Student s1;
@@ -12,6 +13,10 @@ int main() {
 
     Schedule sch1;
     Schedule sch2("Tuesday", "10:00", "202");
+
+    Student s3 = s2;          
+    Student s4 = std::move(s3); 
+    Student s5 = s1 + s2;
 
     s1.display();
     s2.display();
