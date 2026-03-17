@@ -1,18 +1,40 @@
-#include "Schedule.h"
-#include <iostream>
+#ifndef SCHEDULE_H
+#define SCHEDULE_H
+
+#include <string>
+#include "Course.h"   
+
+class Schedule {
+private:
+    std::string day;
+    std::string time;
+    std::string room;
+
+    Course* course;  
+
+public:
+    Schedule();
+    Schedule(std::string day, std::string time, std::string room = "TBD");
+
+    
+    Schedule(std::string day, std::string time, std::string room, Course* course);
+
+    ~Schedule();
+
+    void display() const;
+};
 
 
-Schedule::Schedule() : Schedule("Monday", "08:00", "101") {}
 
-Schedule::Schedule(std::string day, std::string time, std::string room)
-    : day(day), time(time), room(room) {}
+class ExamSchedule : public Schedule {
+private:
+    std::string examType; 
 
-Schedule::~Schedule() {
-    std::cout << "Schedule destroyed\n";
-}
+public:
+    ExamSchedule(std::string day, std::string time, std::string room,
+                 Course* course, std::string examType);
 
-void Schedule::display() const {
-    std::cout << "Day: " << day
-              << ", Time: " << time
-              << ", Room: " << room << std::endl;
-}
+    void display() const;
+};
+
+#endif
