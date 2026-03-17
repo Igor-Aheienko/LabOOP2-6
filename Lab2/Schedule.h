@@ -14,7 +14,7 @@ private:
 
 public:
     Schedule();
-    Schedule(std::string day, std::string time, std::string room = "TBD");
+    Schedule(std::string day, std::string time, std::string room);
 
    
     Schedule(std::string day, std::string time, std::string room, Course* course);

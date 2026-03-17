@@ -20,6 +20,21 @@ public:
     }
 };
 
+class Teacher {
+private:
+    std::string name;
+    std::string subject;
+
+public:
+    Teacher(std::string name = "Unknown", std::string subject = "Unknown")
+        : name(name), subject(subject) {}
+
+    void display() const {
+        std::cout << "Teacher: " << name
+                  << ", Subject: " << subject << std::endl;
+    }
+};
+
 
 class Student : public Person {
 private:
