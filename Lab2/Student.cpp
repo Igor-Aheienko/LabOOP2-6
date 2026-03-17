@@ -6,17 +6,17 @@ int Student::studentCount = 0;
 Student::Student() : Student("Unknown", 18, 1) {}
 
 Student::Student(std::string name, int age, int year)
-    : name(name), age(age), year(year) {
+    : Person(name), age(age), year(year) {   // 🔥 ВАЖЛИВО
     studentCount++;
 }
 
 Student::Student(const Student& other)
-    : name(other.name), age(other.age), year(other.year) {
+    : Person(other.name), age(other.age), year(other.year) {   // 🔥 ВАЖЛИВО
     std::cout << "Student copied\n";
 }
 
 Student::Student(Student&& other)
-    : name(std::move(other.name)), age(other.age), year(other.year) {
+    : Person(std::move(other.name)), age(other.age), year(other.year) {   // 🔥 ВАЖЛИВО
     std::cout << "Student moved\n";
 }
 
@@ -31,7 +31,7 @@ void Student::display() const {
 }
 
 void Student::setAge(int age) {
-    this->age = age;   
+    this->age = age;
 }
 
 int Student::getCount() {

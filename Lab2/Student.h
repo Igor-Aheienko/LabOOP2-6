@@ -4,13 +4,29 @@
 #include <string>
 #include <iostream>
 
-class Student {
-private:
+
+class Person {
+protected:
     std::string name;
+
+public:
+    Person() {}
+    Person(std::string name) : name(name) {}
+
+    virtual ~Person() {}
+
+    virtual void display() const {
+        std::cout << "Name: " << name << std::endl;
+    }
+};
+
+
+class Student : public Person {
+private:
     int age;
     int year;
 
-    static int studentCount;   // static поле
+    static int studentCount;
 
 public:
     Student();
@@ -29,6 +45,7 @@ public:
 
     Student operator+(const Student& other);   
 
+    
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
 };
