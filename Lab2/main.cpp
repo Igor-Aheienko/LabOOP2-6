@@ -21,9 +21,8 @@ int main() {
 
     Teacher t1("Ivan", "Math");
 
-    Course c1("Algebra", "OldTeacher", 3);   // старий варіант
-    Course c2("Physics", &t1, 4);            // новий варіант
-
+    Course c1("Algebra", "OldTeacher", 3);   
+    Course c2("Physics", &t1, 4);           
     OnlineCourse c3("C++", &t1, 5, "Udemy");
 
     s1.display();
