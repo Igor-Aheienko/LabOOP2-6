@@ -1,38 +1,51 @@
 #include "Student.h"
 #include "Course.h"
 #include "Schedule.h"
-
+#include <iostream>
 
 int main() {
 
-    Student s1;
-    Student s2("Igor", 19, 2);
+    
+    Student s1("Ivan", 18, 1);
+    Student s2("Petro", 19, 2);
 
-    Course c1;
-    Course c2("Programming", "Dr. Smith", 5);
-
-    Schedule sch1;
-    Schedule sch2("Tuesday", "10:00", "202");
-
-    Student s3 = s2;          
-    Student s4 = std::move(s3); 
-    Student s5 = s1 + s2;
-    std::cout << Student::getCount() << std::endl;
-
-    Teacher t1("Ivan", "Math");
-
-    Course c1("Algebra", "OldTeacher", 3);   
-    Course c2("Physics", &t1, 4);           
-    OnlineCourse c3("C++", &t1, 5, "Udemy");
-
+    std::cout << "Students:\n";
     s1.display();
     s2.display();
 
+    
+    Student s3 = s1 + s2;
+    std::cout << "\nCombined student:\n";
+    s3.display();
+
+   
+    Teacher t1("Dr.Smith", "Math");
+
+   
+    Course c1("Algebra", "OldTeacher", 3);   
+    Course c2("Physics", &t1, 4);            
+
+    std::cout << "\nCourses:\n";
     c1.display();
     c2.display();
 
+    
+    OnlineCourse oc1("C++", &t1, 5, "Udemy");
+
+    std::cout << "\nOnline course:\n";
+    oc1.display();
+
+    
+    Schedule sch1("Monday", "10:00", "101", &c2);
+
+    std::cout << "\nSchedule:\n";
     sch1.display();
-    sch2.display();
+
+   
+    ExamSchedule ex1("Friday", "12:00", "202", &c2, "Final");
+
+    std::cout << "\nExam schedule:\n";
+    ex1.display();
 
     return 0;
 }
