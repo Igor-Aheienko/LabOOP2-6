@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 
-
 class Person {
 protected:
     std::string name;
@@ -35,7 +34,6 @@ public:
     }
 };
 
-
 class Student : public Person {
 private:
     int age;
@@ -47,20 +45,23 @@ public:
     Student();
     Student(std::string name, int age, int year = 1);
 
-    Student(const Student& other);   
-    Student(Student&& other);        
+    // 🔹 Copy / Move (вимога лаби)
+    Student(const Student& other);
+    Student(Student&& other) noexcept;
+
+    // 🔹 Operator = (вимога лаби)
+    Student& operator=(const Student& other);
 
     ~Student();
 
     void display() const;
 
-    void setAge(int age);  
+    void setAge(int age);
 
-    static int getCount();  
+    static int getCount();
 
-    Student operator+(const Student& other);   
+    Student operator+(const Student& other);
 
-    
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
 };
