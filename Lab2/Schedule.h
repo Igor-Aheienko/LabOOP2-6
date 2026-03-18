@@ -2,7 +2,7 @@
 #define SCHEDULE_H
 
 #include <string>
-#include "Course.h"   
+#include "Course.h"
 
 class Schedule {
 private:
@@ -10,31 +10,33 @@ private:
     std::string time;
     std::string room;
 
-    Course* course;  
+    Course* course;
 
 public:
     Schedule();
     Schedule(std::string day, std::string time, std::string room);
 
-   
     Schedule(std::string day, std::string time, std::string room, Course* course);
 
-    ~Schedule();
+    // 🔥 Copy + operator= (важливо через вказівник)
+    Schedule(const Schedule& other);
+    Schedule& operator=(const Schedule& other);
 
-    void display() const;
+    virtual ~Schedule(); // 🔥
+
+    virtual void display() const; // 🔥
 };
-
 
 
 class ExamSchedule : public Schedule {
 private:
-    std::string examType; 
+    std::string examType;
 
 public:
     ExamSchedule(std::string day, std::string time, std::string room,
                  Course* course, std::string examType);
 
-    void display() const;
+    void display() const override; // 🔥
 };
 
 #endif
