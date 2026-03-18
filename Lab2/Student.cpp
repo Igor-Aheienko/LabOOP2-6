@@ -23,7 +23,7 @@ Student::Student(Student&& other) noexcept
     std::cout << "Student moved\n";
 }
 
-// 🔥 Operator =
+// Operator =
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
         Person::operator=(other); // копіюємо базовий клас

@@ -15,24 +15,24 @@ Schedule::Schedule(std::string day, std::string time, std::string room, Course* 
         this->course = nullptr;
 }
 
-// 🔁 Copy constructor
+//  Copy constructor
 Schedule::Schedule(const Schedule& other)
     : day(other.day), time(other.time), room(other.room) {
 
     if (other.course)
-        course = new Course(*other.course); // 🔥 deep copy
+        course = new Course(*other.course); 
     else
         course = nullptr;
 }
 
-// 🔁 operator=
+//  operator=
 Schedule& Schedule::operator=(const Schedule& other) {
     if (this != &other) {
         day = other.day;
         time = other.time;
         room = other.room;
 
-        delete course; // 🔥 очистка
+        delete course; 
 
         if (other.course)
             course = new Course(*other.course);
@@ -43,7 +43,7 @@ Schedule& Schedule::operator=(const Schedule& other) {
 }
 
 Schedule::~Schedule() {
-    delete course; // 🔥 щоб не було витоку
+    delete course; 
     std::cout << "Schedule destroyed\n";
 }
 
@@ -57,7 +57,7 @@ void Schedule::display() const {
 }
 
 
-// 🔥 ExamSchedule
+
 ExamSchedule::ExamSchedule(std::string day, std::string time, std::string room,
                            Course* course, std::string examType)
     : Schedule(day, time, room, course), examType(examType) {}

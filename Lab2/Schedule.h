@@ -18,13 +18,13 @@ public:
 
     Schedule(std::string day, std::string time, std::string room, Course* course);
 
-    // 🔥 Copy + operator= (важливо через вказівник)
+    // Copy + operator= (важливо через вказівник)
     Schedule(const Schedule& other);
     Schedule& operator=(const Schedule& other);
 
-    virtual ~Schedule(); // 🔥
+    virtual ~Schedule(); 
 
-    virtual void display() const; // 🔥
+    virtual void display() const; 
 };
 
 
@@ -36,7 +36,7 @@ public:
     ExamSchedule(std::string day, std::string time, std::string room,
                  Course* course, std::string examType);
 
-    void display() const override; // 🔥
+    void display() const override;
 };
 
 #endif

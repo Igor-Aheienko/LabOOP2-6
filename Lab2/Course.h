@@ -21,9 +21,9 @@ public:
     Course(const Course& other);
     Course& operator=(const Course& other);
 
-    virtual ~Course(); // 🔥 важливо для наслідування
+    virtual ~Course(); //  важливо для наслідування
 
-    virtual void display() const; // 🔥 щоб override працював
+    virtual void display() const; //  щоб override працював
 };
 
 
@@ -34,7 +34,7 @@ private:
 public:
     OnlineCourse(std::string title, Teacher* teacherObj, int credits, std::string platform);
 
-    void display() const override; // 🔥 override
+    void display() const override; //  override
 };
 
 #endif

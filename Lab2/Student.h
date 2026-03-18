@@ -45,11 +45,11 @@ public:
     Student();
     Student(std::string name, int age, int year = 1);
 
-    // 🔹 Copy / Move (вимога лаби)
+    //  Copy / Move 
     Student(const Student& other);
     Student(Student&& other) noexcept;
 
-    // 🔹 Operator = (вимога лаби)
+    //  Operator 
     Student& operator=(const Student& other);
 
     ~Student();
