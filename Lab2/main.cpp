@@ -10,6 +10,7 @@ int main() {
     Student s2("Petro", 19, 2);
 
     std::cout << "Students:\n";
+    std::cout << "\nTotal students: " << Student::getCount() << std::endl;
     s1.display();
     s2.display();
 
