@@ -17,7 +17,7 @@ Course::Course(std::string title, Teacher* teacherObj, int credits)
         this->teacherObj = nullptr;
 }
 
-// 🔁 COPY constructor
+//  COPY constructor
 Course::Course(const Course& other)
     : title(other.title),
       teacher(other.teacher),
