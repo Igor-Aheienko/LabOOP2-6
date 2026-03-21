@@ -24,7 +24,7 @@ Course::Course(const Course& other)
       credits(other.credits) {
 
     if (other.teacherObj)
-        teacherObj = new Teacher(*other.teacherObj); // 🔥 deep copy
+        teacherObj = new Teacher(*other.teacherObj); //  deep copy
     else
         teacherObj = nullptr;
 

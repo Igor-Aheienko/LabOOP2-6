@@ -10,7 +10,7 @@ Schedule::Schedule(std::string day, std::string time, std::string room, Course* 
     : day(day), time(time), room(room) {
 
     if (course)
-        this->course = new Course(*course); // 🔥 deep copy
+        this->course = new Course(*course); //  deep copy
     else
         this->course = nullptr;
 }
