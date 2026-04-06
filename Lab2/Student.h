@@ -4,6 +4,13 @@
 #include <string>
 #include <iostream>
 
+//  новий інтерфейс
+class Printable {
+public:
+    virtual void print() const = 0;
+    virtual ~Printable() {}
+};
+
 class Person {
 protected:
     std::string name;
@@ -34,7 +41,7 @@ public:
     }
 };
 
-class Student : public Person {
+class Student : public Person, public Printable { // 🔥 NEW (інтерфейс)
 private:
     int age;
     int year;
@@ -45,16 +52,16 @@ public:
     Student();
     Student(std::string name, int age, int year = 1);
 
-    //  Copy / Move 
+    // Copy / Move
     Student(const Student& other);
     Student(Student&& other) noexcept;
 
-    //  Operator 
+    // Operator
     Student& operator=(const Student& other);
 
     ~Student();
 
-    void display() const;
+    void display() const override;
 
     void setAge(int age);
 
@@ -64,6 +71,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
+
+    //  нове реалізація інтерфейсу
+    void print() const override;
 };
 
 #endif

@@ -26,7 +26,7 @@ Student::Student(Student&& other) noexcept
 // Operator =
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
-        Person::operator=(other); // копіюємо базовий клас
+        Person::operator=(other);
         age = other.age;
         year = other.year;
     }
@@ -63,4 +63,11 @@ std::ostream& operator<<(std::ostream& os, const Student& s) {
 std::istream& operator>>(std::istream& is, Student& s) {
     is >> s.name >> s.age >> s.year;
     return is;
+}
+
+//  новий інтерфейс
+void Student::print() const {
+    std::cout << "[Printable] Student: " << name
+              << ", Age: " << age
+              << ", Year: " << year << std::endl;
 }
