@@ -50,14 +50,14 @@ int main() {
     oc1.display();
 
 
-    // 🔥 POINTER POLYMORPHISM
+    //  POINTER POLYMORPHISM
     Course* ptr = &oc1;
     std::cout << "\nPointer polymorphism:\n";
     ptr->display();
     ptr->info();
 
 
-    // 🔥 REFERENCE POLYMORPHISM
+    //  REFERENCE POLYMORPHISM
     std::cout << "\nReference polymorphism:\n";
     showCourse(oc1);
 
