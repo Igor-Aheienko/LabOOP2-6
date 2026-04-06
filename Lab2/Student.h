@@ -41,7 +41,7 @@ public:
     }
 };
 
-class Student : public Person, public Printable { // 🔥 NEW (інтерфейс)
+class Student : public Person, public Printable { //  новий інтерфейс
 private:
     int age;
     int year;
