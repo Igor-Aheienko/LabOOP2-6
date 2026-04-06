@@ -9,41 +9,33 @@ Schedule::Schedule(std::string day, std::string time, std::string room)
 Schedule::Schedule(std::string day, std::string time, std::string room, Course* course)
     : day(day), time(time), room(room) {
 
-    if (course)
-        this->course = new Course(*course); //  deep copy
-    else
-        this->course = nullptr;
+    
+    this->course = course;
 }
 
-//  Copy constructor
+// Copy constructor
 Schedule::Schedule(const Schedule& other)
     : day(other.day), time(other.time), room(other.room) {
 
-    if (other.course)
-        course = new Course(*other.course); 
-    else
-        course = nullptr;
+    
+    course = other.course;
 }
 
-//  operator=
+// operator=
 Schedule& Schedule::operator=(const Schedule& other) {
     if (this != &other) {
         day = other.day;
         time = other.time;
         room = other.room;
 
-        delete course; 
-
-        if (other.course)
-            course = new Course(*other.course);
-        else
-            course = nullptr;
+        
+        course = other.course;
     }
     return *this;
 }
 
 Schedule::~Schedule() {
-    delete course; 
+    //  НЕ delete course важливо
     std::cout << "Schedule destroyed\n";
 }
 
@@ -52,17 +44,29 @@ void Schedule::display() const {
               << ", Time: " << time
               << ", Room: " << room << std::endl;
 
-    if (course)
-        course->display();
+    if (course) {
+        course->display(); //  полiк
+        course->info();    //  pure virtual
+    }
+}
+
+void Schedule::showDetails() const {
+    std::cout << "General schedule details\n";
+}
+
+void ExamSchedule::showDetails() const {
+    std::cout << "Exam type details\n";
 }
 
 
+//  ExamSchedule 
 
 ExamSchedule::ExamSchedule(std::string day, std::string time, std::string room,
                            Course* course, std::string examType)
     : Schedule(day, time, room, course), examType(examType) {}
 
 void ExamSchedule::display() const {
+    std::cout << "[Exam]\n";
     Schedule::display();
     std::cout << "Exam type: " << examType << std::endl;
 }
