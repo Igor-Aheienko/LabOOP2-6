@@ -1,29 +1,26 @@
 #include "Student.h"
 #include <iostream>
-#include <utility> // для std::move
+#include <utility>
 
 int Student::studentCount = 0;
 
 Student::Student() : Student("Unknown", 18, 1) {}
 
-Student::Student(std::string name, int age, int year)
+Student::Student(string name, int age, int year)
     : Person(name), age(age), year(year) {
     studentCount++;
 }
 
-// Copy constructor
 Student::Student(const Student& other)
     : Person(other), age(other.age), year(other.year) {
-    std::cout << "Student copied\n";
+    cout << "Student copied\n";
 }
 
-// Move constructor
 Student::Student(Student&& other) noexcept
-    : Person(std::move(other)), age(other.age), year(other.year) {
-    std::cout << "Student moved\n";
+    : Person(move(other)), age(other.age), year(other.year) {
+    cout << "Student moved\n";
 }
 
-// Operator =
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
         Person::operator=(other);
@@ -34,16 +31,29 @@ Student& Student::operator=(const Student& other) {
 }
 
 Student::~Student() {
-    std::cout << "Student destroyed\n";
+    cout << "Student destroyed\n";
 }
 
 void Student::display() const {
-    std::cout << "Name: " << name
-              << ", Age: " << age
-              << ", Year: " << year << std::endl;
+    cout << "Name: " << name << ", Age: " << age << ", Year: " << year << endl;
 }
 
-void Student::setAge(int age) {
+void Student::check() const { cout << "\nExam permit check for student " << name << ": no academic debts found.\n"; }
+void Student::getStatus() const { cout << "\nStatus: student " << name << " is actively preparing for exams.\n"; }
+
+bool Student::canAccess(string zone) const {
+    return (zone == "Library" || zone == "Classroom");
+}
+
+void Student::showType() const {
+    cout << "Object_type: Student";
+}
+
+string Student::getIdentifier() const {
+    return "Student " + name;
+}
+
+void Student::setAge(int age)  {
     this->age = age;
 }
 
@@ -55,19 +65,12 @@ Student Student::operator+(const Student& other) {
     return Student(name + "&" + other.name, age, year);
 }
 
-std::ostream& operator<<(std::ostream& os, const Student& s) {
+ostream& operator<<(ostream& os, const Student& s) {
     os << s.name << " " << s.age << " " << s.year;
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Student& s) {
+istream& operator>>(istream& is, Student& s) {
     is >> s.name >> s.age >> s.year;
     return is;
-}
-
-//  новий інтерфейс
-void Student::print() const {
-    std::cout << "[Printable] Student: " << name
-              << ", Age: " << age
-              << ", Year: " << year << std::endl;
 }
