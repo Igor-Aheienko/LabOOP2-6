@@ -1,48 +1,46 @@
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
 
+#include "InterfaceSystem.h"
 #include <string>
+#include <iostream>
 #include "Course.h"
 
-class Schedule {
-private:
-    std::string day;
-    std::string time;
-    std::string room;
+using namespace std;
 
+class Schedule : public InterfaceSystem {
+private:
+    string day;
+    string time;
+    string room;
     Course* course;
 
 public:
     Schedule();
-    Schedule(std::string day, std::string time, std::string room);
+    Schedule(string day, string time, string room);
+    Schedule(string day, string time, string room, Course* course);
 
-    Schedule(std::string day, std::string time, std::string room, Course* course);
-
-    // Copy + operator=
     Schedule(const Schedule& other);
     Schedule& operator=(const Schedule& other);
 
-    virtual ~Schedule(); 
+    bool canAccess(string zone) const override;
+    void showType() const override;
+    string getIdentifier() const override;
 
-    virtual void display() const; 
+    virtual ~Schedule();
 
-    // щоб було більше поліморфізму
-    virtual void showDetails() const;
+    virtual void display() const;
 };
 
-
-class ExamSchedule final : public Schedule {  
+class ExamSchedule : public Schedule {
 private:
-    std::string examType;
+    string examType;
 
 public:
-    ExamSchedule(std::string day, std::string time, std::string room,
-                 Course* course, std::string examType);
+    ExamSchedule(string day, string time, string room,
+        Course* course, string examType);
 
     void display() const override;
-
-    // new
-    void showDetails() const override;
 };
 
 #endif

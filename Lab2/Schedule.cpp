@@ -3,70 +3,72 @@
 
 Schedule::Schedule() : Schedule("Monday", "08:00", "101") {}
 
-Schedule::Schedule(std::string day, std::string time, std::string room)
-    : day(day), time(time), room(room), course(nullptr) {}
-
-Schedule::Schedule(std::string day, std::string time, std::string room, Course* course)
-    : day(day), time(time), room(room) {
-
-    
-    this->course = course;
+Schedule::Schedule(string day, string time, string room)
+    : day(day), time(time), room(room), course(nullptr) {
 }
 
-// Copy constructor
+Schedule::Schedule(string day, string time, string room, Course* course)
+    : day(day), time(time), room(room) {
+    if (course)
+        this->course = new Course(*course);
+    else
+        this->course = nullptr;
+}
+
 Schedule::Schedule(const Schedule& other)
     : day(other.day), time(other.time), room(other.room) {
-
-    
-    course = other.course;
+    if (other.course)
+        course = new Course(*other.course);
+    else
+        course = nullptr;
 }
 
-// operator=
 Schedule& Schedule::operator=(const Schedule& other) {
     if (this != &other) {
         day = other.day;
         time = other.time;
         room = other.room;
 
-        
-        course = other.course;
+        delete course;
+
+        if (other.course)
+            course = new Course(*other.course);
+        else
+            course = nullptr;
     }
     return *this;
 }
 
 Schedule::~Schedule() {
-    //  НЕ delete course важливо
-    std::cout << "Schedule destroyed\n";
+    delete course;
+    cout << "Schedule destroyed" << endl;
 }
 
 void Schedule::display() const {
-    std::cout << "Day: " << day
-              << ", Time: " << time
-              << ", Room: " << room << std::endl;
+    cout << "Day: " << day << ", Time: " << time  << ", Room: " << room << endl;
 
-    if (course) {
-        course->display(); //  полiк
-        course->info();    //  pure virtual
-    }
+    if (course)
+        course->display();
 }
 
-void Schedule::showDetails() const {
-    std::cout << "General schedule details\n";
+bool Schedule::canAccess(string zone) const {
+    return (zone == room); 
 }
 
-void ExamSchedule::showDetails() const {
-    std::cout << "Exam type details\n";
+void Schedule::showType() const {
+    cout << "Object_type: Schedule_entry";
 }
 
+string Schedule::getIdentifier() const {
+    return day + "_" + time; 
+}
 
-//  ExamSchedule 
-
-ExamSchedule::ExamSchedule(std::string day, std::string time, std::string room,
-                           Course* course, std::string examType)
-    : Schedule(day, time, room, course), examType(examType) {}
+ExamSchedule::ExamSchedule(string day, string time, string room,
+    Course* course, string examType)
+    : Schedule(day, time, room, course), examType(examType) {
+}
 
 void ExamSchedule::display() const {
-    std::cout << "[Exam]\n";
     Schedule::display();
-    std::cout << "Exam type: " << examType << std::endl;
+    cout << "Exam type: " << examType << endl;
 }
