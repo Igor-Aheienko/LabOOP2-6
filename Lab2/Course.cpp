@@ -1,39 +1,32 @@
 #include "Course.h"
 #include <iostream>
-#include <utility>
-
-// ===== Course =====
 
 Course::Course() : Course("Unknown", "Unknown", 3) {}
 
-Course::Course(std::string title, std::string teacher, int credits)
-    : title(title), teacher(teacher), credits(credits), teacherObj(nullptr) {}
+Course::Course(string title, string teacher, int credits)
+    : title(title), teacher(teacher), credits(credits), teacherObj(nullptr) {
+}
 
-// Конструктор з об'єктом Teacher
-Course::Course(std::string title, Teacher* teacherObj, int credits)
+Course::Course(string title, Teacher* teacherObj, int credits)
     : title(title), teacher(""), credits(credits) {
-
     if (teacherObj)
-        this->teacherObj = new Teacher(*teacherObj); // deep copy
+        this->teacherObj = new Teacher(*teacherObj);
     else
         this->teacherObj = nullptr;
 }
 
-// COPY constructor
 Course::Course(const Course& other)
     : title(other.title),
-      teacher(other.teacher),
-      credits(other.credits) {
-
+    teacher(other.teacher),
+    credits(other.credits) {
     if (other.teacherObj)
-        teacherObj = new Teacher(*other.teacherObj); // deep copy
+        teacherObj = new Teacher(*other.teacherObj);
     else
         teacherObj = nullptr;
 
-    std::cout << "Course copied\n";
+    cout << "Course copied" << endl;
 }
 
-// operator=
 Course& Course::operator=(const Course& other) {
     if (this != &other) {
         title = other.title;
@@ -50,36 +43,23 @@ Course& Course::operator=(const Course& other) {
     return *this;
 }
 
-// destructor
 Course::~Course() {
     delete teacherObj;
-    std::cout << "Course destroyed\n";
+    cout << "Course destroyed" << endl;
 }
 
-// display
 void Course::display() const {
-    std::cout << "Course: " << title
-              << ", Teacher: " << teacher
-              << ", Credits: " << credits << std::endl;
+    cout << "Course: " << title << ", Teacher: " << teacher << ", Credits: " << credits << endl;
 
     if (teacherObj)
         teacherObj->display();
 }
 
-
-// ===== OnlineCourse =====
-
-OnlineCourse::OnlineCourse(std::string title, Teacher* teacherObj, int credits, std::string platform)
-    : Course(title, teacherObj, credits), platform(platform) {}
-
-// override display
-void OnlineCourse::display() const {
-    std::cout << "[Online Course]\n";
-    Course::display();
-    std::cout << "Platform: " << platform << std::endl;
+OnlineCourse::OnlineCourse(string title, Teacher* teacherObj, int credits, string platform)
+    : Course(title, teacherObj, credits), platform(platform) {
 }
 
-//  FIX — додали const
-void OnlineCourse::info() const {
-    std::cout << "This is an online course on platform: " << platform << std::endl;
+void OnlineCourse::display() const {
+    Course::display();
+    cout << "Platform: " << platform << endl;
 }
